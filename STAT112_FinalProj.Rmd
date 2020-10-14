@@ -19,7 +19,8 @@ library(prettydoc)
 ```
 
 ```{r, echo=FALSE}
-heart_disease <- read_csv("/Users/alexanderdenzler/Documents/Macalester/Senior/Module 1/STAT 112/STAT112_Final_Proj/cardio_train.csv")
+cardio_train <- read_delim("https://raw.githubusercontent.com/alexdenzler/STAT112_Final_Proj/master/cardio_train.csv", 
+    ";", escape_double = FALSE, trim_ws = TRUE)
 ```
 
 
