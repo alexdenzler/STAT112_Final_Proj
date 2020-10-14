@@ -19,7 +19,7 @@ library(prettydoc)
 ```
 
 ```{r, echo=FALSE}
-heart_disease <- read_csv("https://raw.githubusercontent.com/alexdenzler/STAT112_Final_Proj/master/heart.csv")
+heart_disease <- read_csv("/Users/alexanderdenzler/Documents/Macalester/Senior/Module 1/STAT 112/STAT112_Final_Proj/cardio_train.csv")
 ```
 
 
