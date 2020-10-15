@@ -16,6 +16,8 @@ output:
 library(tidyverse)
 library(readr)
 library(prettydoc)
+library(corrplot)
+library(gganimate)
 ```
 
 ```{r, echo=FALSE}
@@ -26,12 +28,55 @@ cardio_train <- read_delim("https://raw.githubusercontent.com/alexdenzler/STAT11
 cardio_train <- cardio_train %>% 
   rename(sys_bp = ap_hi, dias_bp = ap_lo) %>% 
   mutate(age = age/365, height = height*0.393701,
-         weight = weight*2.20462, gender = ifelse(1, "F", "M"),
-         smoke = ifelse(1, "Y", "N"), alco = ifelse(1, "Y", "N"),
-         active = ifelse(1, "Y", "N"), cardio = ifelse(1, "Y", "N"))
+         weight = weight*2.20462, gender = ifelse(gender == 1, "F", "M"),
+         smoke = ifelse(smoke == 1, "Y", "N"), alco = ifelse(alco == 1, "Y", "N"),
+         active = ifelse(active == 1, "Y", "N"), cardio = ifelse(cardio == 1, "Y", "N"))
 ```
 
-**NOTE** Cleaning not finished
 
 
+```{r}
+cardio_train %>% 
+ ggplot(aes(y = cholesterol, fill = cardio)) +
+  geom_bar(position = "dodge") +
+  scale_fill_manual(values = c("red", "turquoise"))
+```
+
+```{r}
+cardio_train %>% 
+  filter(cholesterol == 1) %>% 
+ ggplot(aes(y = gender, fill = cardio)) +
+  geom_bar(position = "dodge")
+```
+
+```{r}
+cardio_train %>% 
+  filter(cholesterol == 1) %>% 
+ ggplot(aes(y = smoke, fill = cardio)) +
+  geom_bar(position = "dodge")
+```
+```{r}
+cardio_train %>% 
+  filter(cholesterol == 1) %>% 
+ ggplot(aes(y = active, fill = cardio)) +
+  geom_bar(position = "dodge")
+```
+
+```{r}
+cardio_train %>% 
+  filter(cholesterol == 1) %>% 
+ ggplot(aes(y = alco, fill = cardio)) +
+  geom_bar(position = "dodge")
+```
+
+
+
+
+```{r}
+cardio_train %>% 
+  filter(cholesterol == 1) %>% 
+  ggplot(aes(x = height, y = weight, color = cardio)) +
+  geom_jitter() +
+  transition_states(cardio)
+```
 
