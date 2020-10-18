@@ -93,19 +93,45 @@ heart_disease %>%
   ggplot(aes(x = sysBP, y = diaBP, color = TenYearCHD)) +
   geom_jitter()
 ```
+```{r}
+heart_disease %>% 
+  ggplot(aes(x = diabetes, fill = TenYearCHD)) + 
+  geom_bar(position = "dodge")
+```
 
 
 ```{r}
 heart_disease %>% 
-  ggplot(aes(x = BMI, y = heartRate, color = TenYearCHD)) +
+  ggplot(aes(x = BMI, y = heartRate, color = TenYearCHD, shape = diabetes)) +
   geom_point()
 ```
+
 ```{r}
 heart_disease %>% 
-  ggplot(aes(y = totChol, color = TenYearCHD)) +
+  ggplot(aes(x = BMI, y = glucose, color = TenYearCHD, shape = diabetes)) +
+  geom_point()
+```
+
+
+
+```{r}
+heart_disease %>% 
+  ggplot(aes(y = totChol, x = TenYearCHD)) +
   geom_boxplot()
 ```
 
+```{r}
+heart_disease %>% 
+  ggplot(aes(x = cigsPerDay, fill = TenYearCHD)) +
+  geom_bar(position = "dodge")
+```
+
+
+```{r}
+heart_disease %>% 
+  ggplot(aes(y = glucose, x = TenYearCHD)) +
+  geom_boxplot()
+```
 
 
 ```{r}
