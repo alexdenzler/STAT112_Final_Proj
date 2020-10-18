@@ -96,6 +96,19 @@ heart_disease %>%
 
 
 ```{r}
+heart_disease %>% 
+  ggplot(aes(x = BMI, y = heartRate, color = TenYearCHD)) +
+  geom_point()
+```
+```{r}
+heart_disease %>% 
+  ggplot(aes(y = totChol, color = TenYearCHD)) +
+  geom_boxplot()
+```
+
+
+
+```{r}
 cardio_train %>% 
  ggplot(aes(y = cholesterol, fill = cardio)) +
   geom_bar(position = "dodge") +
