@@ -21,12 +21,12 @@ library(gganimate)
 ```
 
 ```{r, echo=FALSE}
-cardio_train <- read_delim("https://raw.githubusercontent.com/alexdenzler/STAT112_Final_Proj/master/cardio_train.csv", 
+cardio_train <- read_delim("https://raw.githubusercontent.com/alexdenzler/STAT112_Final_Proj/master/cardio_train.csv",
     ";", escape_double = FALSE, trim_ws = TRUE)
 
 #clean the data
-cardio_train <- cardio_train %>% 
-  rename(sys_bp = ap_hi, dias_bp = ap_lo) %>% 
+cardio_train <- cardio_train %>%
+  rename(sys_bp = ap_hi, dias_bp = ap_lo) %>%
   mutate(age = age/365, height = height*0.393701,
          weight = weight*2.20462, gender = ifelse(gender == 1, "F", "M"),
          smoke = ifelse(smoke == 1, "Y", "N"), alco = ifelse(alco == 1, "Y", "N"),
@@ -34,6 +34,65 @@ cardio_train <- cardio_train %>%
          smokeAndDrink = ifelse(smoke == "Y" & alco == "Y", "Y", "N"))
 ```
 
+```{r}
+heart_disease <- read_csv("https://raw.githubusercontent.com/alexdenzler/STAT112_Final_Proj/master/framingham.csv", 
+    col_types = cols(male = col_factor(levels = c("1", 
+        "0")), education = col_factor(levels = c("4", 
+        "3", "2", "1")), currentSmoker = col_factor(levels = c("1", 
+        "0")), BPMeds = col_factor(levels = c("1", 
+        "0")), prevalentStroke = col_factor(levels = c("1", 
+        "0")), prevalentHyp = col_factor(levels = c("1", 
+        "0")), diabetes = col_factor(levels = c("1", 
+        "0")), TenYearCHD = col_factor(levels = c("1", 
+        "0"))))
+```
+
+```{r}
+heart_disease <- heart_disease %>% 
+  rename(sex = male, hadStroke = prevalentStroke, 
+         hasHyp = prevalentHyp) %>% 
+  mutate(sex = ifelse(sex == 1, "M", "F"), 
+         education = ifelse(education == 4, "College", 
+                            ifelse(education == 3, "someC", 
+                                   ifelse(education == 2, "HS", "someHS"))),
+         currentSmoker = ifelse(currentSmoker == 1, "Y", "N"),
+         BPMeds = ifelse(BPMeds == 1, "Y", "N"),
+         hadStroke = ifelse(hadStroke == 1, "Y", "N"),
+         hasHyp = ifelse(hasHyp == 1, "Y", "N"),
+         diabetes = ifelse(diabetes == 1, "Y", "N"),
+         TenYearCHD = ifelse(TenYearCHD == 1, "Y", "N"))
+```
+
+
+```{r}
+heart_disease %>% 
+  ggplot(aes(x = currentSmoker, fill = TenYearCHD)) +
+  geom_bar()
+```
+
+```{r}
+heart_disease %>% 
+  ggplot(aes(x = education, fill = TenYearCHD)) +
+  geom_bar()
+```
+
+```{r}
+heart_disease %>% 
+  ggplot(aes(x = sex, fill = TenYearCHD)) +
+  geom_bar()
+```
+
+```{r}
+heart_disease %>% 
+  ggplot(aes(x = BMI, y = heartRate, fill = TenYearCHD)) +
+  geom_bar(stat = "identity")
+```
+
+```{r}
+heart_disease %>% 
+  ggplot(aes(x = sysBP, y = diaBP, color = TenYearCHD)) +
+  geom_jitter()
+```
 
 
 ```{r}
