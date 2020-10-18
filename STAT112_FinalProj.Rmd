@@ -30,7 +30,8 @@ cardio_train <- cardio_train %>%
   mutate(age = age/365, height = height*0.393701,
          weight = weight*2.20462, gender = ifelse(gender == 1, "F", "M"),
          smoke = ifelse(smoke == 1, "Y", "N"), alco = ifelse(alco == 1, "Y", "N"),
-         active = ifelse(active == 1, "Y", "N"), cardio = ifelse(cardio == 1, "Y", "N"))
+         active = ifelse(active == 1, "Y", "N"), cardio = ifelse(cardio == 1, "Y", "N"),
+         smokeAndDrink = ifelse(smoke == "Y" & alco == "Y", "Y", "N"))
 ```
 
 
@@ -69,14 +70,16 @@ cardio_train %>%
   geom_bar(position = "dodge")
 ```
 
-
-
-
 ```{r}
 cardio_train %>% 
-  filter(cholesterol == 1) %>% 
-  ggplot(aes(x = height, y = weight, color = cardio)) +
-  geom_jitter() +
-  transition_states(cardio)
+  filter(smokeAndDrink == "Y") %>% 
+  ggplot(aes(x = smokeAndDrink, fill = cardio)) + 
+  geom_bar()
 ```
+
+
+
+
+
+
 
