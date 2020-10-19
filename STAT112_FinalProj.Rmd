@@ -18,6 +18,8 @@ library(readr)
 library(prettydoc)
 library(corrplot)
 library(gganimate)
+library(ggimage)
+library(patchwork)
 ```
 
 
@@ -107,21 +109,23 @@ heart_disease %>%
   geom_boxplot()
 ```
 
-
-```{r}
-# heart_disease <- heart_disease %>% 
-#   mutate(image = )
-```
-
-
-```{r}
-heart_disease %>% 
+```{r, fig.width = 10}
+cigsDens <- heart_disease %>% 
   ggplot(aes(x = cigsPerDay, fill = TenYearCHD)) +
   geom_density(position = "dodge", alpha = .7) +
-  labs(title = "Effect of Number of Cigarettes per Day on Coronary Heart Disease Risk",
-       x = "Cigarettes per Day",
+  labs(x = "Cigarettes per Day",
        y = "Density",
        fill = "At Risk")
+
+cigsHeart <- heart_disease %>% 
+  filter(currentSmoker == "Y") %>% 
+  ggplot(aes(x = cigsPerDay, y = totChol, color = TenYearCHD)) + 
+  geom_jitter(alpha = .7) + 
+  labs(x = "Cigarettes per Day",
+       y = "Total Cholesterol",
+       color = "At Risk")
+
+cigsDens + cigsHeart + plot_annotation(title = "Effect of Number of Cigarettes per Day on Coronary Heart Disease Risk")
 ```
 
 
