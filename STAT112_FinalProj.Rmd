@@ -20,19 +20,6 @@ library(corrplot)
 library(gganimate)
 ```
 
-```{r, echo=FALSE}
-cardio_train <- read_delim("https://raw.githubusercontent.com/alexdenzler/STAT112_Final_Proj/master/cardio_train.csv",
-    ";", escape_double = FALSE, trim_ws = TRUE)
-
-#clean the data
-cardio_train <- cardio_train %>%
-  rename(sys_bp = ap_hi, dias_bp = ap_lo) %>%
-  mutate(age = age/365, height = height*0.393701,
-         weight = weight*2.20462, gender = ifelse(gender == 1, "F", "M"),
-         smoke = ifelse(smoke == 1, "Y", "N"), alco = ifelse(alco == 1, "Y", "N"),
-         active = ifelse(active == 1, "Y", "N"), cardio = ifelse(cardio == 1, "Y", "N"),
-         smokeAndDrink = ifelse(smoke == "Y" & alco == "Y", "Y", "N"))
-```
 
 ```{r}
 heart_disease <- read_csv("https://raw.githubusercontent.com/alexdenzler/STAT112_Final_Proj/master/framingham.csv", 
@@ -120,11 +107,23 @@ heart_disease %>%
   geom_boxplot()
 ```
 
+
+```{r}
+# heart_disease <- heart_disease %>% 
+#   mutate(image = )
+```
+
+
 ```{r}
 heart_disease %>% 
   ggplot(aes(x = cigsPerDay, fill = TenYearCHD)) +
-  geom_bar(position = "dodge")
+  geom_density(position = "dodge", alpha = .7) +
+  labs(title = "Effect of Number of Cigarettes per Day on Coronary Heart Disease Risk",
+       x = "Cigarettes per Day",
+       y = "Density",
+       fill = "At Risk")
 ```
+
 
 
 ```{r}
@@ -133,6 +132,23 @@ heart_disease %>%
   geom_boxplot()
 ```
 
+
+
+## Appendix
+
+```{r, echo=FALSE}
+cardio_train <- read_delim("https://raw.githubusercontent.com/alexdenzler/STAT112_Final_Proj/master/cardio_train.csv",
+    ";", escape_double = FALSE, trim_ws = TRUE)
+
+#clean the data
+cardio_train <- cardio_train %>%
+  rename(sys_bp = ap_hi, dias_bp = ap_lo) %>%
+  mutate(age = age/365, height = height*0.393701,
+         weight = weight*2.20462, gender = ifelse(gender == 1, "F", "M"),
+         smoke = ifelse(smoke == 1, "Y", "N"), alco = ifelse(alco == 1, "Y", "N"),
+         active = ifelse(active == 1, "Y", "N"), cardio = ifelse(cardio == 1, "Y", "N"),
+         smokeAndDrink = ifelse(smoke == "Y" & alco == "Y", "Y", "N"))
+```
 
 ```{r}
 cardio_train %>% 
