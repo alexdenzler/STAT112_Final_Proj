@@ -25,7 +25,7 @@ library(patchwork)
 
 ## Introduction
 
-This data set explores the factors that could possibly go into getting coronary heart disease. Coronary heart disease is usually caused by the buildup of plaque in the arteries which in turn limits the blood flow to the heart. It is a disease that can be treated, but cannot be cured at this point. Due to its chronic nature the want to prevent the disease is much greater. The indicating variables in this data set include : age, gender, whether or not the person smokes, how many cigarettes a day, whether they take blood pressure medication, if they have had a stroke, if they have diabetes, if they have hypertension, systolic and diastolic blood pressure, cholesterol, heart rate, and glucose levels. We want to look at all of these to see if they have an effect on whether the person has a risk of getting coronary heart disease, but more specifically we are most interested in whether smoking has an effect on coronary heart disease. 
+This data set explores the factors that could possibly go into getting coronary heart disease. Coronary heart disease is usually caused by the buildup of plaque in the arteries, which in turn limits the blood flow to the heart. It is a disease that can be treated, but cannot be cured at this point. Due to its chronic nature the want to prevent the disease is much greater. The indicating variables in this data set include : age, gender, whether or not the person smokes, how many cigarettes they smoke per day, whether they take blood pressure medication, if they have had a stroke, if they have diabetes, if they have hypertension, systolic and diastolic blood pressure, cholesterol, heart rate, and glucose levels. We want to look at all of these to see if they have an effect on whether the person has a risk of getting coronary heart disease, but more specifically we are most interested in whether smoking has an effect on coronary heart disease. 
 
 
 ```{r, echo = FALSE}
@@ -83,26 +83,32 @@ heart_disease %>%
   ggplot(aes(x = sysBP, y = diaBP, color = TenYearCHD)) +
   geom_jitter()
 ```
+
 ```{r}
 heart_disease %>% 
   ggplot(aes(x = diabetes, fill = TenYearCHD)) + 
   geom_bar(position = "dodge")
 ```
 
+In this graph, we compare the proportions of subjects with and without heart disease between those who have diabetes and those who don't. Among those with diabetes, it appears that about one third also have heart disease, compared to about one-eighth among those who don't have diabetes. Thus, it seems as if diabetes is a decent indicator of whether or not someone will develop heart disease as well.   
 
 ```{r}
 heart_disease %>% 
-  ggplot(aes(x = BMI, y = heartRate, color = TenYearCHD, shape = diabetes)) +
-  geom_point()
+  ggplot(aes(x = BMI, y = heartRate, color = TenYearCHD)) +
+  geom_point() +
+  facet_wrap(vars(diabetes))
 ```
+
+This graph displays the various BMI and heart rates of subjects with and without heart disease, divided into those with and without diabetes. As shown in the previous graph, it is clear that a majority of subjects don't have diabetes, but there is a significantly higher proportion of subjects with heart disease among the diabetic group. There doesn't appear to be much of a noticeable correlation between CHD and BMI or heart rate, other than that the majority of subjects with the highest heart rates among those without diabetes tended not to have heart disease. 
 
 ```{r}
 heart_disease %>% 
-  ggplot(aes(x = BMI, y = glucose, color = TenYearCHD, shape = diabetes)) +
-  geom_point()
+  ggplot(aes(x = BMI, y = glucose, color = TenYearCHD)) +
+  geom_point() +
+  facet_wrap(vars(diabetes))
 ```
 
-
+This graph displays the various BMI and heart rates of subjects with and without heart disease, divided into those with and without diabetes. As shown in the previous two graphs, it is clear that a majority of subjects don't have diabetes, but there is a significantly higher proportion of subjects with heart disease among the diabetic group. There doesn't appear to be much of a noticeable correlation between CHD and BMI or glucose level in the non-diabetic group, but it appears that subjects with higher glucose levels in the diabetic group were more likely to have heart disease than diabetic subjects with lower glucose levels.
 
 ```{r}
 heart_disease %>% 
