@@ -25,10 +25,10 @@ library(patchwork)
 
 ## Introduction
 
-This data set explores the factors that could possibly go into getting coronary heart disease. Coronary heart disease is usually caused by the buildup of plaque in the arteries which in turn limits the blood flow to the heart. It is a disease that can be treated, but cannot be cured at this point. Due to its chronic nature the want to prevent the disease is much greater. The indicating variables in this data set include : age, gender, whether or not the person smokes, how many cigarettes a day, whether they take blood pressure medication, if they have had a stroke, if they have diabetes, if they have hypertension, systolic and diostolic blood pressure, cholesterol, heart rate, and glucose levels. We want to look at all of these to see if they have an effect on whether the person has a risk of getting coronary heart disease, but more specifically we are most interested in whether smoking has an effect on coronary heart disease. 
+This data set explores the factors that could possibly go into getting coronary heart disease. Coronary heart disease is usually caused by the buildup of plaque in the arteries which in turn limits the blood flow to the heart. It is a disease that can be treated, but cannot be cured at this point. Due to its chronic nature the want to prevent the disease is much greater. The indicating variables in this data set include : age, gender, whether or not the person smokes, how many cigarettes a day, whether they take blood pressure medication, if they have had a stroke, if they have diabetes, if they have hypertension, systolic and diastolic blood pressure, cholesterol, heart rate, and glucose levels. We want to look at all of these to see if they have an effect on whether the person has a risk of getting coronary heart disease, but more specifically we are most interested in whether smoking has an effect on coronary heart disease. 
 
 
-```{r}
+```{r, echo = FALSE}
 heart_disease <- read_csv("https://raw.githubusercontent.com/alexdenzler/STAT112_Final_Proj/master/framingham.csv", 
     col_types = cols(male = col_factor(levels = c("1", 
         "0")), education = col_factor(levels = c("4", 
@@ -41,7 +41,7 @@ heart_disease <- read_csv("https://raw.githubusercontent.com/alexdenzler/STAT112
         "0"))))
 ```
 
-```{r}
+```{r, echo = FALSE}
 heart_disease <- heart_disease %>% 
   rename(sex = male, hadStroke = prevalentStroke, 
          hasHyp = prevalentHyp) %>% 
