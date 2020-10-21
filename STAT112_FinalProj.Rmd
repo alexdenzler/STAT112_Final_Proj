@@ -58,31 +58,87 @@ heart_disease <- heart_disease %>%
 ```
 
 
-```{r}
+### Investigating the Data
+
+```{r, echo = FALSE}
 heart_disease %>% 
   ggplot(aes(x = currentSmoker, fill = TenYearCHD)) +
-  geom_bar()
+  geom_bar() +
+  labs(title = "Effect of Being a Current Smoker on CHD Risk",
+       x = "Current Smoker",
+       y = "Count",
+       fill = "At Risk") + 
+  theme(plot.background = element_rect(fill = "grey92"), 
+        legend.background = element_rect(fill = "grey92"))
 ```
 
-```{r}
+In this first plot, we are observing the trend between current smokers and their risk for coronary heart disease at an extremely high level. This one plot does not tell us too much, except for the fact that more current smokers are at risk of coronary heart disease, which is to be expected. The purpose of this plot is more to investigate the data.
+
+
+```{r, echo = FALSE}
+heart_disease$education <-
+  factor(heart_disease$education, levels = c("someHS", "HS", "someC", "College", "NA"))
+
 heart_disease %>% 
+  filter(!is.na(education)) %>% 
   ggplot(aes(x = education, fill = TenYearCHD)) +
-  geom_bar()
+  geom_bar() +
+  labs(title = "Effect of Maximum Education on CHD Risk",
+       x = "Maximum Education",
+       y = "Count",
+       fill = "At Risk") +
+  theme(plot.background = element_rect(fill = "grey92"), 
+        legend.background = element_rect(fill = "grey92"))
 ```
 
-```{r}
+This second plot is similar to the first in that we are simply investigating the data. However, it does tell an interesting story about how maximum education affects whether or not someone is at risk for coronary heart disease. This plot looks like it tells us that the lower the level of someone's maximum education, the more at risk someone is for CHD. However, when we look at the actual proportions, there is a higher proportion of college educated people who are at risk than people who have some college education or highschool education.
+
+```{r, echo = FALSE}
+heart_disease$education <-
+  factor(heart_disease$education, levels = c("someHS", "HS", "someC", "College", "NA"))
+
+heart_disease %>% 
+  filter(!is.na(education)) %>% 
+  ggplot(aes(x = education, fill = TenYearCHD)) +
+  geom_bar(position = "fill") +
+  labs(title = "Effect of Maximum Education on CHD Risk",
+       x = "Maximum Education",
+       y = "Proportion",
+       fill = "At Risk") +
+  theme(plot.background = element_rect(fill = "grey92"), 
+        legend.background = element_rect(fill = "grey92"))
+```
+
+
+```{r, echo = FALSE}
 heart_disease %>% 
   ggplot(aes(x = sex, fill = TenYearCHD)) +
-  geom_bar()
+  geom_bar() +
+  labs(title = "Effect of Sex on CHD Risk",
+       x = "Sex",
+       y = "Count",
+       fill = "At Risk") +
+  theme(plot.background = element_rect(fill = "grey92"), 
+        legend.background = element_rect(fill = "grey92"))
 ```
 
+Next, we wanted to investigate whether sex had an effect of being at risk of coronary heart disease. This plot is a lot clearer than the education plot in terms of what it is telling us. Here, we can clearly see that not only are more men at risk for CHD, the proportion of men who are at risk is also much higher than for women.
 
 
-```{r}
+```{r, echo = FALSE}
 heart_disease %>% 
   ggplot(aes(x = sysBP, y = diaBP, color = TenYearCHD)) +
-  geom_jitter()
+  geom_jitter() +
+  labs(title = "Effect of Systolic and Diastolic Blood Pressure on CHD Risk",
+       x = "Systolic Blood Pressure",
+       y = "Diastolic Blood Pressure",
+       color = "At Risk") +
+  theme(plot.background = element_rect(fill = "grey92"), 
+        legend.background = element_rect(fill = "grey92"))
 ```
+
+In this plot, we are looking at the effects of blood pressure levels on whether or not someone is at risk. Here, it is clear that the majority of the at risk points are towards the higher end of the plot, while the majority of the not at risk points are at the lower end of the plot. Logically, it makes sense that people with higher blood pressure are at risk for CHD, given that high blood pressure is one of the most telling signs of heart problems in general.
+
 
 ```{r}
 heart_disease %>% 
