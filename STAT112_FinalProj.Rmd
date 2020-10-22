@@ -58,6 +58,11 @@ heart_disease <- heart_disease %>%
 ```
 
 
+
+\
+
+
+
 ### Investigating the Data
 
 ```{r, echo = FALSE}
@@ -140,45 +145,90 @@ heart_disease %>%
 In this plot, we are looking at the effects of blood pressure levels on whether or not someone is at risk. Here, it is clear that the majority of the at risk points are towards the higher end of the plot, while the majority of the not at risk points are at the lower end of the plot. Logically, it makes sense that people with higher blood pressure are at risk for CHD, given that high blood pressure is one of the most telling signs of heart problems in general.
 
 
-```{r}
+```{r, echo = FALSE}
 heart_disease %>% 
   ggplot(aes(x = diabetes, fill = TenYearCHD)) + 
-  geom_bar(position = "dodge")
+  geom_bar(position = "dodge") +
+  labs(title = "Does Diabetes Affect CHD Risk?",
+       x = "Diabetes",
+       y = "Count",
+       fill = "At Risk") +
+  theme(plot.background = element_rect(fill = "grey92"), 
+        legend.background = element_rect(fill = "grey92"))
 ```
 
 In this graph, we compare the proportions of subjects with and without heart disease between those who have diabetes and those who don't. Among those with diabetes, it appears that about one third also have heart disease, compared to about one-eighth among those who don't have diabetes. Thus, it seems as if diabetes is a decent indicator of whether or not someone will develop heart disease as well.   
 
-```{r}
+```{r, echo = FALSE}
 heart_disease %>% 
   ggplot(aes(x = BMI, y = heartRate, color = TenYearCHD)) +
   geom_point() +
-  facet_wrap(vars(diabetes))
+  facet_wrap(vars(diabetes)) +
+  labs(title = "Is There a Correlation Between Heartrate and BMI?",
+       x = "BMI",
+       y = "Heart Rate",
+       color = "At Risk") +
+  theme(plot.background = element_rect(fill = "grey92"), 
+        legend.background = element_rect(fill = "grey92"))
 ```
 
 This graph displays the various BMI and heart rates of subjects with and without heart disease, divided into those with and without diabetes. As shown in the previous graph, it is clear that a majority of subjects don't have diabetes, but there is a significantly higher proportion of subjects with heart disease among the diabetic group. There doesn't appear to be much of a noticeable correlation between CHD and BMI or heart rate, other than that the majority of subjects with the highest heart rates among those without diabetes tended not to have heart disease. 
 
-```{r}
+```{r, echo = FALSE}
 heart_disease %>% 
   ggplot(aes(x = BMI, y = glucose, color = TenYearCHD)) +
   geom_point() +
-  facet_wrap(vars(diabetes))
+  facet_wrap(vars(diabetes)) +
+  labs(title = "Is There a Correlation Between Glucose Levels and BMI?",
+       x = "BMI",
+       y = "Glucose Level",
+       color = "At Risk") +
+  theme(plot.background = element_rect(fill = "grey92"), 
+        legend.background = element_rect(fill = "grey92"))
 ```
 
 This graph displays the various BMI and heart rates of subjects with and without heart disease, divided into those with and without diabetes. As shown in the previous two graphs, it is clear that a majority of subjects don't have diabetes, but there is a significantly higher proportion of subjects with heart disease among the diabetic group. There doesn't appear to be much of a noticeable correlation between CHD and BMI or glucose level in the non-diabetic group, but it appears that subjects with higher glucose levels in the diabetic group were more likely to have heart disease than diabetic subjects with lower glucose levels.
 
-```{r}
+```{r, echo = FALSE}
 heart_disease %>% 
   ggplot(aes(y = totChol, x = TenYearCHD)) +
-  geom_boxplot()
+  geom_boxplot() +
+  labs(title = "Boxplots of Risk versus Total Cholesterol Levels",
+       x = "At Risk",
+       y = "Total Cholesterol") +
+  theme(plot.background = element_rect(fill = "grey92"), 
+        legend.background = element_rect(fill = "grey92"))
 ```
 
-```{r, fig.width = 10}
+
+This graph shows us side by side boxplots that show total cholesterol levels split up by whether or not someone is at risk. What we see here is that the median cholesterol level for people who are at risk is only slightly higher than for people who are not at risk. We are also able to see that the difference between the 25th percentile and 75th percentile, otherwise known as the interquartile range (IQR), is roughly the same size for both people who are and aren't at risk. There are also some pretty significant outliers, which we can ignore.
+
+
+```{r, echo = FALSE}
+heart_disease %>% 
+  ggplot(aes(y = glucose, x = TenYearCHD)) +
+  geom_boxplot() +
+  labs(title = "Boxplots of Risk versus Glucose Levels",
+       x = "At Risk",
+       y = "Glucose Level") +
+  theme(plot.background = element_rect(fill = "grey92"), 
+        legend.background = element_rect(fill = "grey92"))
+```
+
+
+This plot is similar to the previous one, however it paints a much different picture. Surprisingly there seems to be a significant difference between the IQR when looking at glucose levels compared to cholesterol levels. The medians are almost the exact same however, and there are many outliers. These outliers can probably explain the larger 75th percentile of the interquartile range.
+
+
+```{r, fig.width = 10, echo = FALSE}
 cigsDens <- heart_disease %>% 
   ggplot(aes(x = cigsPerDay, fill = TenYearCHD)) +
   geom_density(position = "dodge", alpha = .7) +
   labs(x = "Cigarettes per Day",
        y = "Density",
-       fill = "At Risk")
+       fill = "At Risk") +
+  theme(plot.background = element_rect(fill = "grey92"), 
+        legend.background = element_rect(fill = "grey92")) 
+  
 
 cigsHeart <- heart_disease %>% 
   filter(currentSmoker == "Y") %>% 
@@ -186,18 +236,24 @@ cigsHeart <- heart_disease %>%
   geom_jitter(alpha = .7) + 
   labs(x = "Cigarettes per Day",
        y = "Total Cholesterol",
-       color = "At Risk")
+       color = "At Risk") +
+  theme(plot.background = element_rect(fill = "grey92"), 
+        legend.background = element_rect(fill = "grey92"))
 
 cigsDens + cigsHeart + plot_annotation(title = "Effect of Number of Cigarettes per Day on Coronary Heart Disease Risk")
 ```
 
+Because of the significant outliers in glucose, we decided to look at how cigarette usage affects risk of CHD, and used cholesterol levels to explain it. The plot on the left, which is our density plot, shows us that out of people who are at risk, a comparatively large number of cigarettes are smoked. There is a strange portion of the plot for people who are not at risk for CHD where a significant number of people who are not at risk smoke 20 cigarettes per day. However, when looking at the jitter plot next to it, where we are comparing cigarettes per day versus total cholesterol, there is a large portion of people who are not at risk and smoke 20 cigarettes per day that have very low cholesterol.
 
 
-```{r}
-heart_disease %>% 
-  ggplot(aes(y = glucose, x = TenYearCHD)) +
-  geom_boxplot()
-```
+
+\
+\
+
+
+
+
+## Analysis
 
 
 
