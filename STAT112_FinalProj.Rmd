@@ -96,7 +96,7 @@ heart_disease %>%
         legend.background = element_rect(fill = "grey92"))
 ```
 
-Next, we compated education level with heart disease risk. This plot is similar to the first in that we must explore the indicator variables in order to conduct our analysis. However, it does tell an interesting story about how maximum education affects whether or not someone is at risk for coronary heart disease. This plot looks like it tells us that the lower the level of someone's maximum education, the more at risk someone is for CHD. However, when we look at the actual proportions, there is a higher proportion of college educated people who are at risk than people who have some college education or highschool education.
+Next, we compated education level with heart disease risk. This plot is similar to the first in that we must explore the indicator variables in order to conduct our analysis. However, it does tell an interesting story about how maximum education affects whether or not someone is at risk for coronary heart disease. Although this plot conveys that one's education level achieved determines the risk someone for CHD, this is not necessarily the case proportionally. In the graph below we look at the education level proportions and find that there is a higher proportion of people who are college educated who are at risk for CHD than people who have some college education or a completed highschool education.
 
 ```{r, echo = FALSE}
 heart_disease$education <-
@@ -269,6 +269,8 @@ heart_disease %>%
   facet_wrap(~education)
   
 ```
+
+
 
 
 ## Appendix
