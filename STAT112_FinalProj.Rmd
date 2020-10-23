@@ -58,10 +58,19 @@ heart_disease <- heart_disease %>%
 ```
 
 
+## Data Collection
 
+We collected this data from [Kaggle](https://www.kaggle.com/dileep070/heart-disease-prediction-using-logistic-regression). This data has been collected in a town in Framingham, Massachussetts.  
+
+
+
+\
 \
 
 
+
+
+## Analysis
 
 ### Investigating the Data
 
@@ -254,14 +263,6 @@ cigsDens + cigsHeart + plot_annotation(title = "Effect of Number of Cigarettes p
 
 Finally, we wanted to address our main focus by graphing the effect of cigarette usage on risk of CHD. We used a density plot on the left and a jitter plot on the right that uses cholesterol as an explanatory variable. The density plot shows us that at risk participants smoke more cigarettes than those who are not at risk. It is also seen in both plots that the number of cigarettes smoked per day is somewhat organized into multiples of five. This makes sense because we assumed that the data collected is an estimation of cigarettes per day not an exact study. Therefore, we experience a stratified distribution. Similarly, out of the participants who smoke, the majority smoke 20 cigarettes a day. This is likely the case because there are 20 cigarettes in a single pack. These participants likely stated that they smoke about a pack a day. Although these graphs provide results that show people who smoke are at a greater risk for CHD, we wanted to isolate smoking by controlling for the other indicators of CHD as well as incorporate other factors that could impact CHD. 
 
-
-\
-\
-
-
-
-
-## Analysis
 
 ### Variable Importance
 We can see from the graphs above that in this dataset the most prevalant variables in predicting risk of CHD are education, diabetes, glucose levels, cholesterol levels, and how many cigarettes you smoke. We can see this by the fact that the proportions of people who have ten year risk of CHD is higher when these things are abnormal, or for in the case of education it is significantly different for different levels. In order to see how cigarettes actually effect risk of CHD, we will control for all of these variables other than how many cigarettes you smoke. 
