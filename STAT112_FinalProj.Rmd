@@ -1,5 +1,5 @@
 ---
-title: "An Investigation into Causes of Heart Disease"
+title: "An Investigation into Causes of Coronary Heart Disease"
 subtitle: "STAT 112 Final Project"
 author: "Alexander Denzler, William Moscato, Matthew Polemeni-Hegarty, Erik Hager"
 date: "10/23/2020"
@@ -25,7 +25,7 @@ library(patchwork)
 
 ## Introduction
 
-This data set explores the factors that could possibly go into getting coronary heart disease. Coronary heart disease is usually caused by the buildup of plaque in the arteries, which in turn limits the blood flow to the heart. It is a disease that can be treated, but cannot be cured at this point. Due to its chronic nature, disease prevention is the most effective treatment. The indicating variables in this data set include : age, gender, whether or not the person smokes, how many cigarettes they smoke per day, whether they take blood pressure medication, if they have had a stroke, if they have diabetes, if they have hypertension, systolic and diastolic blood pressure, cholesterol, heart rate, and glucose levels. We want to look at all of these to see if they have an effect on whether the person has a risk of getting coronary heart disease, but more specifically we are most interested in whether smoking has an effect on coronary heart disease. 
+This data set explores the factors that could possibly go into getting Coronary Heart Disease (CHD). CHD is usually caused by the buildup of plaque in the arteries, which in turn limits the blood flow to the heart. It is a disease that can be treated, but cannot be cured at this point. Due to its chronic nature, disease prevention is the most effective treatment. The indicating variables in this data set include : age, gender, whether or not the person smokes, how many cigarettes they smoke per day, whether they take blood pressure medication, if they have had a stroke, if they have diabetes, if they have hypertension, systolic and diastolic blood pressure, cholesterol, heart rate, and glucose levels. We want to look at all of these to see if they have an effect on whether the person has a risk of getting CHD, but more specifically we are most interested in whether smoking has an effect on CHD. 
 
 
 ```{r, echo = FALSE}
@@ -69,6 +69,7 @@ heart_disease <- heart_disease %>%
 heart_disease %>% 
   ggplot(aes(x = currentSmoker, fill = TenYearCHD)) +
   geom_bar() +
+  scale_fill_manual(values = c("red", "green4")) +
   labs(title = "Effect of Being a Current Smoker on CHD Risk",
        x = "Current Smoker",
        y = "Count",
@@ -88,6 +89,7 @@ heart_disease %>%
   filter(!is.na(education)) %>% 
   ggplot(aes(x = education, fill = TenYearCHD)) +
   geom_bar() +
+  scale_fill_manual(values = c("red", "green4")) +
   labs(title = "Effect of Maximum Education on CHD Risk",
        x = "Maximum Education",
        y = "Count",
@@ -106,6 +108,7 @@ heart_disease %>%
   filter(!is.na(education)) %>% 
   ggplot(aes(x = education, fill = TenYearCHD)) +
   geom_bar(position = "fill") +
+  scale_fill_manual(values = c("red", "green4")) +
   labs(title = "Effect of Maximum Education on CHD Risk",
        x = "Maximum Education",
        y = "Proportion",
@@ -119,6 +122,7 @@ heart_disease %>%
 heart_disease %>% 
   ggplot(aes(x = sex, fill = TenYearCHD)) +
   geom_bar() +
+  scale_fill_manual(values = c("red", "green4")) +
   labs(title = "Effect of Sex on CHD Risk",
        x = "Sex",
        y = "Count",
@@ -134,6 +138,7 @@ Next, we wanted to investigate whether sex had an effect of being at risk of cor
 heart_disease %>% 
   ggplot(aes(x = sysBP, y = diaBP, color = TenYearCHD)) +
   geom_jitter() +
+  scale_color_manual(values = c("red", "green4")) +
   labs(title = "Effect of Systolic and Diastolic Blood Pressure on CHD Risk",
        x = "Systolic Blood Pressure",
        y = "Diastolic Blood Pressure",
@@ -149,6 +154,7 @@ In this plot, we are looking at the effects of blood pressure levels on whether 
 heart_disease %>% 
   ggplot(aes(x = diabetes, fill = TenYearCHD)) + 
   geom_bar(position = "dodge") +
+  scale_fill_manual(values = c("red", "green4")) +
   labs(title = "Does Diabetes Affect CHD Risk?",
        x = "Diabetes",
        y = "Count",
@@ -163,6 +169,7 @@ In this graph, we compare the proportions of subjects with and without heart dis
 heart_disease %>% 
   ggplot(aes(x = BMI, y = heartRate, color = TenYearCHD)) +
   geom_point() +
+  scale_color_manual(values = c("red", "green4")) +
   facet_wrap(vars(diabetes)) +
   labs(title = "Is There a Correlation Between Heartrate and BMI?",
        x = "BMI",
@@ -178,6 +185,7 @@ This graph displays the various BMI and heart rates of subjects with and without
 heart_disease %>% 
   ggplot(aes(x = BMI, y = glucose, color = TenYearCHD)) +
   geom_point() +
+  scale_color_manual(values = c("red", "green4")) +
   facet_wrap(vars(diabetes)) +
   labs(title = "Is There a Correlation Between Glucose Levels and BMI?",
        x = "BMI",
@@ -223,6 +231,7 @@ This plot is similar to the previous one, however it paints a much different pic
 cigsDens <- heart_disease %>% 
   ggplot(aes(x = cigsPerDay, fill = TenYearCHD)) +
   geom_density(position = "dodge", alpha = .7) +
+  scale_fill_manual(values = c("red", "green4")) +
   labs(x = "Cigarettes per Day",
        y = "Density",
        fill = "At Risk") +
@@ -234,6 +243,7 @@ cigsHeart <- heart_disease %>%
   filter(currentSmoker == "Y") %>% 
   ggplot(aes(x = cigsPerDay, y = totChol, color = TenYearCHD)) + 
   geom_jitter(alpha = .7) + 
+  scale_color_manual(values = c("red", "green4")) +
   labs(x = "Cigarettes per Day",
        y = "Total Cholesterol",
        color = "At Risk") +
@@ -261,21 +271,35 @@ education, diabetes, glucose, cholesterol, ciggs
   
 ### Controlled Graph
 
-```{r}
+```{r, echo = FALSE}
 heart_disease %>% 
-  filter(diabetes == "N", glucose < 140, totChol > 125 & totChol < 200) %>% 
+  filter(diabetes == "N", glucose < 140, 
+         totChol > 125 & totChol < 200, education != "NA") %>% 
   ggplot(aes(x = cigsPerDay, fill = TenYearCHD)) +
   geom_density(position = "dodge", alpha = 0.7) +
-  facet_wrap(~education)
-  
+  scale_fill_manual(values = c("red", "green4")) +
+  facet_wrap(~education) +
+  labs(title = "Density of Cigarettes per Day by Education",
+       x = "Cigarettes per Day",
+       y = "Density",
+       fill = "At Risk") +
+  theme(plot.background = element_rect(fill = "grey92"), 
+        legend.background = element_rect(fill = "grey92"))
 ```
 
 
+Finally, we create this controlled graph. We have controlled for cholesterol and glucose levels that are considered healthy. A normal glucose level is below 140, while a normal cholesterol level is between 125 and 200. By controlling for these variables, we are able to deduce two possibilities for why it looks like people who are not at risk smoke a significant amount of cigarettes. The first possibility is that for people who are not at risk, the trend in how many cigarettes they smoke does not change much depending on education. However, for people who are at risk of CHD, finishing their college education plays a large role. The density for people who are both at risk and have finished their college education is significantly different than for people who have not finished college, which certainly explains the spike in density at 20 cigarettes per day in our original plot. Through this logic, by controlling for education, we are able to see that there is a significant effect of smoking on being at risk for CHD.
+
+
+
+\
 
 
 ## Appendix
 
-```{r, echo=FALSE}
+This appendix shows the original dataset we intended to use, as well as the plots we created to investigate the data.
+
+```{r}
 cardio_train <- read_delim("https://raw.githubusercontent.com/alexdenzler/STAT112_Final_Proj/master/cardio_train.csv",
     ";", escape_double = FALSE, trim_ws = TRUE)
 
@@ -289,41 +313,40 @@ cardio_train <- cardio_train %>%
          smokeAndDrink = ifelse(smoke == "Y" & alco == "Y", "Y", "N"))
 ```
 
-```{r}
+```{r, echo = FALSE}
 cardio_train %>% 
  ggplot(aes(y = cholesterol, fill = cardio)) +
-  geom_bar(position = "dodge") +
-  scale_fill_manual(values = c("red", "turquoise"))
+  geom_bar(position = "dodge")
 ```
 
-```{r}
+```{r, echo = FALSE}
 cardio_train %>% 
   filter(cholesterol == 1) %>% 
  ggplot(aes(y = gender, fill = cardio)) +
   geom_bar(position = "dodge")
 ```
 
-```{r}
+```{r, echo = FALSE}
 cardio_train %>% 
   filter(cholesterol == 1) %>% 
  ggplot(aes(y = smoke, fill = cardio)) +
   geom_bar(position = "dodge")
 ```
-```{r}
+```{r, echo = FALSE}
 cardio_train %>% 
   filter(cholesterol == 1) %>% 
  ggplot(aes(y = active, fill = cardio)) +
   geom_bar(position = "dodge")
 ```
 
-```{r}
+```{r, echo = FALSE}
 cardio_train %>% 
   filter(cholesterol == 1) %>% 
  ggplot(aes(y = alco, fill = cardio)) +
   geom_bar(position = "dodge")
 ```
 
-```{r}
+```{r, echo = FALSE}
 cardio_train %>% 
   filter(smokeAndDrink == "Y") %>% 
   ggplot(aes(x = smokeAndDrink, fill = cardio)) + 
