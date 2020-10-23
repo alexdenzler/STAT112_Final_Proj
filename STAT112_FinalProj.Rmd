@@ -25,7 +25,7 @@ library(patchwork)
 
 ## Introduction
 
-This data set explores the factors that could possibly go into getting Coronary Heart Disease (CHD). CHD is usually caused by the buildup of plaque in the arteries, which in turn limits the blood flow to the heart. It is a disease that can be treated, but cannot be cured at this point. Due to its chronic nature, disease prevention is the most effective treatment. The indicating variables in this data set include : age, gender, whether or not the person smokes, how many cigarettes they smoke per day, whether they take blood pressure medication, if they have had a stroke, if they have diabetes, if they have hypertension, systolic and diastolic blood pressure, cholesterol, heart rate, and glucose levels. We want to look at all of these to see if they have an effect on whether the person has a risk of getting CHD, but more specifically we are most interested in whether smoking has an effect on CHD. 
+This data set explores the factors that could possibly go into getting Coronary Heart Disease (CHD). CHD is usually caused by the buildup of plaque in the arteries, which in turn limits the blood flow to the heart. It is a disease that can be treated, but cannot be cured at this point. Due to its chronic nature, disease prevention is the most effective treatment. The indicating variables in this data set include : age, gender, whether or not the person smokes, how many cigarettes they smoke per day, whether they take blood pressure medication, if they have had a stroke, if they have diabetes, if they have hypertension, systolic and diastolic blood pressure, cholesterol, heart rate, and glucose levels. The several graphs below take a look at all of these indicators of CHD to see if they have an effect on whether someone is at risk of CHD. This will allow us to control for our primary goal to determine whether this data can further prove that smoking has an effect on CHD. 
 
 
 ```{r, echo = FALSE}
@@ -131,7 +131,7 @@ heart_disease %>%
         legend.background = element_rect(fill = "grey92"))
 ```
 
-Next, we wanted to investigate whether sex had an effect of being at risk of coronary heart disease. This plot is a lot clearer than the education plot in terms of what it is telling us. Here, we can clearly see that not only are more men at risk for CHD, the proportion of men who are at risk is also much higher than for women.
+Next, we wanted to investigate whether sex had an effect on coronary heart disease risk. This plot conveys much cleaner results than previous plots. Here, we can clearly see that not only men are at a greater risk for CHD, the proportion of men who are at risk is also much higher than that of women.
 
 
 ```{r, echo = FALSE}
@@ -147,7 +147,7 @@ heart_disease %>%
         legend.background = element_rect(fill = "grey92"))
 ```
 
-In this plot, we are looking at the effects of blood pressure levels on whether or not someone is at risk. Here, it is clear that the majority of the at risk points are towards the higher end of the plot, while the majority of the not at risk points are at the lower end of the plot. Logically, it makes sense that people with higher blood pressure are at risk for CHD, given that high blood pressure is one of the most telling signs of heart problems in general.
+In this plot, we are looking at the effects of blood pressure levels on whether or not a participant is at risk. Here, it is not completly clear whether the majority of at risk participants are towards the higher end of the plot, however it does look as if there are more participants who are not at risk towardsthe lower left quadrant of the graph. Logically, it would make sense to assume that people with higher blood pressure are more likely to be at risk for CHD, given that high blood pressure is generally one of the most telling signs of heart complications.
 
 
 ```{r, echo = FALSE}
@@ -155,7 +155,7 @@ heart_disease %>%
   ggplot(aes(x = diabetes, fill = TenYearCHD)) + 
   geom_bar(position = "dodge") +
   scale_fill_manual(values = c("red", "green4")) +
-  labs(title = "Does Diabetes Affect CHD Risk?",
+  labs(title = "Diabetes Affect on CHD Risk",
        x = "Diabetes",
        y = "Count",
        fill = "At Risk") +
@@ -163,7 +163,7 @@ heart_disease %>%
         legend.background = element_rect(fill = "grey92"))
 ```
 
-In this graph, we compare the proportions of subjects with and without heart disease between those who have diabetes and those who don't. Among those with diabetes, it appears that about one third also have heart disease, compared to about one-eighth among those who don't have diabetes. Thus, it seems as if diabetes is a decent indicator of whether or not someone will develop heart disease as well.   
+In this graph, we compare the proportions of subjects with and without heart disease between those who have diabetes and those who do not. Among those with diabetes, it appears that about one-third are at risk for heart disease. Compared to the particpants who do not have diabetes, this proportion is far greater. Thus, it appears that diabetes is a significant indicator of CHD risk.   
 
 ```{r, echo = FALSE}
 heart_disease %>% 
@@ -171,7 +171,7 @@ heart_disease %>%
   geom_point() +
   scale_color_manual(values = c("red", "green4")) +
   facet_wrap(vars(diabetes)) +
-  labs(title = "Is There a Correlation Between Heartrate and BMI?",
+  labs(title = "Correlation Between resting Heart Rate and BMI",
        x = "BMI",
        y = "Heart Rate",
        color = "At Risk") +
@@ -179,7 +179,7 @@ heart_disease %>%
         legend.background = element_rect(fill = "grey92"))
 ```
 
-This graph displays the various BMI and heart rates of subjects with and without heart disease, divided into those with and without diabetes. As shown in the previous graph, it is clear that a majority of subjects don't have diabetes, but there is a significantly higher proportion of subjects with heart disease among the diabetic group. There doesn't appear to be much of a noticeable correlation between CHD and BMI or heart rate, other than that the majority of subjects with the highest heart rates among those without diabetes tended not to have heart disease. 
+This graph displays the various BMI and heart rates of participants who display signs of heart disease risk. This graph is also faceted by participants who are diabetic or not. This allows us to determine whether heart rate and BMI have a greater influence in CHD risk for individuals who are already diagnosed with a chronic disease. As conveyed in the previous graph, the majority of the participants are not diabetic, however it is once again clear there is a significantly higher proportion of individuals with heart disease among the diabetic group. Despite this proportion, this graph does not appear to display a noticeable correlation between CHD, BMI, and heart rate. This allows us to conclude that diabetes is a greater indicator for CHD than BMI and heart rate for the participants in this dataset.  
 
 ```{r, echo = FALSE}
 heart_disease %>% 
@@ -195,28 +195,13 @@ heart_disease %>%
         legend.background = element_rect(fill = "grey92"))
 ```
 
-This graph displays the various BMI and heart rates of subjects with and without heart disease, divided into those with and without diabetes. As shown in the previous two graphs, it is clear that a majority of subjects don't have diabetes, but there is a significantly higher proportion of subjects with heart disease among the diabetic group. There doesn't appear to be much of a noticeable correlation between CHD and BMI or glucose level in the non-diabetic group, but it appears that subjects with higher glucose levels in the diabetic group were more likely to have heart disease than diabetic subjects with lower glucose levels.
-
-```{r, echo = FALSE}
-heart_disease %>% 
-  ggplot(aes(y = totChol, x = TenYearCHD)) +
-  geom_boxplot() +
-  labs(title = "Boxplots of Risk versus Total Cholesterol Levels",
-       x = "At Risk",
-       y = "Total Cholesterol") +
-  theme(plot.background = element_rect(fill = "grey92"), 
-        legend.background = element_rect(fill = "grey92"))
-```
-
-
-This graph shows us side by side boxplots that show total cholesterol levels split up by whether or not someone is at risk. What we see here is that the median cholesterol level for people who are at risk is only slightly higher than for people who are not at risk. We are also able to see that the difference between the 25th percentile and 75th percentile, otherwise known as the interquartile range (IQR), is roughly the same size for both people who are and aren't at risk. There are also some pretty significant outliers, which we can ignore.
-
+Next we wanted to create a graph that displays the various BMI and glucose levels of particpants with and without heart disease, faceted by diabetes diagnosis. It is hard to determine whether there is a noticeable correlation between CHD and glucose levels in the non-diabetic group, but it appears that participants with higher glucose levels in the diabetic group were more likely to have heart disease than diabetic participants with lower glucose levels. It is also interesting to note that the glucose levels in diabetic participants is far higher than that of no diabetic particpants. This logically makes sense because a main symptom of diabetes is the inability to process glucose from the bloodstream. 
 
 ```{r, echo = FALSE}
 heart_disease %>% 
   ggplot(aes(y = glucose, x = TenYearCHD)) +
   geom_boxplot() +
-  labs(title = "Boxplots of Risk versus Glucose Levels",
+  labs(title = "Effect of Glucose Levels on CHD Risk",
        x = "At Risk",
        y = "Glucose Level") +
   theme(plot.background = element_rect(fill = "grey92"), 
@@ -224,7 +209,21 @@ heart_disease %>%
 ```
 
 
-This plot is similar to the previous one, however it paints a much different picture. Surprisingly there seems to be a significant difference between the IQR when looking at glucose levels compared to cholesterol levels. The medians are almost the exact same however, and there are many outliers. These outliers can probably explain the larger 75th percentile of the interquartile range.
+In order to get a greater understanding the effect of glucose on CHD risk we isolated glucose into two side by side boxplots that are sorted by at risk and not at risk. Surprisingly there seems to be a significant difference between the IQR when looking at glucose levels compared to cholesterol levels. The at risk median is also slightly greater than the not at risk median. There are also quite a few outliers. These outliers can probably explain the larger 75th percentile of the interquartile range.
+
+```{r, echo = FALSE}
+heart_disease %>% 
+  ggplot(aes(y = totChol, x = TenYearCHD)) +
+  geom_boxplot() +
+  labs(title = "Effect of Cholesterol on CHD Risk",
+       x = "At Risk",
+       y = "Total Cholesterol") +
+  theme(plot.background = element_rect(fill = "grey92"), 
+        legend.background = element_rect(fill = "grey92"))
+```
+
+
+Similar to the graph of glucose, we also created another side by side boxplot comparison that shows participant's total cholesterol levels split up by whether or not someone is at risk for CHD. What we see here is that the median cholesterol level for people who are at risk is  higher than that of participants who are not at risk. We are also able to see that the difference between the 25th percentile and 75th percentile, otherwise known as the interquartile range (IQR), is roughly the same size for both people who are and aren't at risk. Once again, both plots experience some pretty significant outliers.
 
 
 ```{r, fig.width = 10, echo = FALSE}
@@ -253,8 +252,7 @@ cigsHeart <- heart_disease %>%
 cigsDens + cigsHeart + plot_annotation(title = "Effect of Number of Cigarettes per Day on Coronary Heart Disease Risk")
 ```
 
-Because of the significant outliers in glucose, we decided to look at how cigarette usage affects risk of CHD, and used cholesterol levels to explain it. The plot on the left, which is our density plot, shows us that out of people who are at risk, a comparatively large number of cigarettes are smoked. There is a strange portion of the plot for people who are not at risk for CHD where a significant number of people who are not at risk smoke 20 cigarettes per day. However, when looking at the jitter plot next to it, where we are comparing cigarettes per day versus total cholesterol, there is a large portion of people who are not at risk and smoke 20 cigarettes per day that have very low cholesterol.
-
+Finally, we wanted to address our main focus by graphing the effect of cigarette usage on risk of CHD. We used a density plot on the left and a jitter plot on the right that uses cholesterol as an explanatory variable. The density plot shows us that at risk participants smoke more cigarettes than those who are not at risk. It is also seen in both plots that the number of cigarettes smoked per day is somewhat organized into multiples of five. This makes sense because we assumed that the data collected is an estimation of cigarettes per day not an exact study. Therefore, we experience a stratified distribution. Similarly, out of the participants who smoke, the majority smoke 20 cigarettes a day. This is likely the case because there are 20 cigarettes in a single pack. These participants likely stated that they smoke about a pack a day. Although these graphs provide results that show people who smoke are at a greater risk for CHD, we wanted to isolate smoking by controlling for the other indicators of CHD as well as incorporate other factors that could impact CHD. 
 
 
 \
@@ -266,18 +264,22 @@ Because of the significant outliers in glucose, we decided to look at how cigare
 ## Analysis
 
 ### Variable Importance
-We can see from the graphs above that the most important variables in predicting risk of CHD are education, diabetes, glucose levels, cholesterol levels, and how many cigarettes you smoke. We can see this by the fact that the proportions of people who have ten year risk of CHD is higher when these things are abnormal, or for in the case of education it is significantly different for different levels. In order to see how cigarettes actually effect risk of CHD we will control for all the other variables other than how many cigarettes you smoke. 
+We can see from the graphs above that in this dataset the most prevalant variables in predicting risk of CHD are education, diabetes, glucose levels, cholesterol levels, and how many cigarettes you smoke. We can see this by the fact that the proportions of people who have ten year risk of CHD is higher when these things are abnormal, or for in the case of education it is significantly different for different levels. In order to see how cigarettes actually effect risk of CHD, we will control for all of these variables other than how many cigarettes you smoke. 
   
 ### Controlled Graph
 
 ```{r, echo = FALSE}
+education.labs <- c("Some High School", "Completed High School", "Some College", "Completed College")
+names(education.labs) <- c("someHS", "HS", "someC", "College")
+
 heart_disease %>% 
   filter(diabetes == "N", glucose < 140, 
          totChol > 125 & totChol < 200, education != "NA") %>% 
   ggplot(aes(x = cigsPerDay, fill = TenYearCHD)) +
   geom_density(position = "dodge", alpha = 0.7) +
   scale_fill_manual(values = c("red", "green4")) +
-  facet_wrap(~education) +
+  facet_wrap(~education, 
+             labeller = labeller(education = education.labs)) +
   labs(title = "Density of Cigarettes per Day by Education",
        x = "Cigarettes per Day",
        y = "Density",
@@ -287,22 +289,27 @@ heart_disease %>%
 ```
 
 
-Finally, we create this controlled graph. We have controlled for cholesterol and glucose levels that are considered healthy. A normal glucose level is below 140, while a normal cholesterol level is between 125 and 200. By controlling for these variables, we are able to deduce two possibilities for why it looks like people who are not at risk smoke a significant amount of cigarettes. The first possibility is that for people who are not at risk, the trend in how many cigarettes they smoke does not change much depending on education. However, for people who are at risk of CHD, finishing their college education plays a large role. The density for people who are both at risk and have finished their college education is significantly different than for people who have not finished college, which certainly explains the spike in density at 20 cigarettes per day in our original plot. Through this logic, by controlling for education, we are able to see that there is a significant effect of smoking on being at risk for CHD.
+This graph conveys the results of how smoking effects CHD risk while controlling for other prevelant indicators. We did this by filtering cholesterol and glucose levels so that the graph only reflects "healthy" participants. We determined that a normal glucose level is below 140, while a normal cholesterol level is between 125 and 200. We also filtered the diabetes variable to reflect participants in the study that do not have diabetes. By controlling for these variables, we are able to manipulate the data in order to reflect a more accurate depiction of the effect of cigarette smoking on causing CHD in otherwise healthy individuals.
+
+The results of this graph are quite interesting. We can see that there is a much clearer depiction of the effect of smoking on CHD. This graph shows that there is a greater density of participants who are at risk when participants smoke more than 10 cigarettes per day. However, this is not the case for participants who have completed college. The faceted graph that depicts college educated participants shows that almost all the participants who smoke over 15 cigarettes per day are in the not at risk category. We have deduced a few possibilities for why this is the case. For participants who are at risk of CHD, finishing their college education plays a large role in CHD risk. Participants who have not completed college in this datatset seem to have a greater liklihood of being at risk for CHD. This is once again prevelant in these graphs. Therefore, we think that there are other factors that can impact CHD risk that are related to education level. Traditionally, education is often linked to one's socioeconomic class. If this is the case, then we may be able to make some assumptions for why CHD risk is greater for non-college educated participants. For example, access to proper nutrition and excercise could be a significant factor in one's CHD risk. Historically, people who are in middle to lower socioeconomic class have less access to nutritonal foods and sufficient exercise. Similarly, food insecurity and low income can also cause the negative externalities. We believe that the variables provided in this data set are unable to show the whole story about smoking's effect on CHD risk, however provide sufficient evidence that smoking increases CHD risk. 
 
 
 
 \
+\
 
 ## Conclusion
 
-In conclusion we can see that smoking is a factor for being at risk for coronary heart disease. As we covered in the introduction, there is no cure for CHD, so the best thing that we can do is prevent it. From the data we can see the best way to prevent is to watch your cholesterol and glucose levels and eat healthily to prevent diabetes. But, even with doing all of these things it seems that it is important not to smoke in order to prevent CHD. When we think about the health risks of smoking most of the time all that comes up is lung cancer, but it is important to note that it has many other adverse effects such as putting you at higher risk for CHD. 
+In conclusion, we can see that smoking is a factor for being at risk for coronary heart disease. As we covered in the introduction, there is no cure for CHD, so the best thing that we can do is prevent it. From the data we can see the best way to prevent CHD is to maintain healthy cholesterol and glucose levels through proper diet, regular exercise and other healthy life choices. Doing so will also limit risk for diabetes. Participants who were diabetic had the greatest proportion of particpants be at risk for CHD. Despite a healthy diet and exercise, it was still prevalent that smoking will greatly increase your risk for CHD. Normally, smoking is associated with other chronic diseases such as cancer, lung disease, and throat disease, but it is important to note that smoking has many other adverse effects such as increasing risk of CHD. 
 
 
 ## Appendix
 
 This appendix shows the original dataset we intended to use, as well as the plots we created to investigate the data.
 
-```{r}
+These graphs are raw and unfiltered, however may provide additional insight into the analysis we provided. 
+
+```{r, echo = FALSE}
 cardio_train <- read_delim("https://raw.githubusercontent.com/alexdenzler/STAT112_Final_Proj/master/cardio_train.csv",
     ";", escape_double = FALSE, trim_ws = TRUE)
 
