@@ -172,7 +172,7 @@ heart_disease %>%
         legend.background = element_rect(fill = "grey92"))
 ```
 
-In this graph, we compare the proportions of subjects with and without heart disease between those who have diabetes and those who do not. Among those with diabetes, it appears that about one-third are at risk for heart disease. Compared to the particpants who do not have diabetes, this proportion is far greater. Thus, it appears that diabetes is a significant indicator of CHD risk.   
+In this graph, we compare the proportions of subjects with and without heart disease between those who have diabetes and those who do not. Among those with diabetes, it appears that about one-third are at risk for heart disease. Compared to the participants who do not have diabetes, this proportion is far greater. Thus, it appears that diabetes is a significant indicator of CHD risk.   
 
 ```{r, echo = FALSE}
 heart_disease %>% 
@@ -180,7 +180,7 @@ heart_disease %>%
   geom_point() +
   scale_color_manual(values = c("red", "green4")) +
   facet_wrap(vars(diabetes)) +
-  labs(title = "Correlation Between resting Heart Rate and BMI",
+  labs(title = "Effect of Heart Rate and BMI on CHD Risk, by Diabetic Status",
        x = "BMI",
        y = "Heart Rate",
        color = "At Risk") +
@@ -196,7 +196,7 @@ heart_disease %>%
   geom_point() +
   scale_color_manual(values = c("red", "green4")) +
   facet_wrap(vars(diabetes)) +
-  labs(title = "Is There a Correlation Between Glucose Levels and BMI?",
+  labs(title = "Effect of Glucose Level and BMI on CHD Risk, by Diabetic Status",
        x = "BMI",
        y = "Glucose Level",
        color = "At Risk") +
