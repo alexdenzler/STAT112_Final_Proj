@@ -298,6 +298,8 @@ The results of this graph are quite interesting. We can see that there is a much
 \
 \
 
+
+
 ## Conclusion
 
 In conclusion, we can see that smoking is a factor for being at risk for coronary heart disease. As we covered in the introduction, there is no cure for CHD, so the best thing that we can do is prevent it. From the data we can see the best way to prevent CHD is to maintain healthy cholesterol and glucose levels through proper diet, regular exercise and other healthy life choices. Doing so will also limit risk for diabetes. Participants who were diabetic had the greatest proportion of particpants be at risk for CHD. Despite a healthy diet and exercise, it was still prevalent that smoking will greatly increase your risk for CHD. Normally, smoking is associated with other chronic diseases such as cancer, lung disease, and throat disease, but it is important to note that smoking has many other adverse effects such as increasing risk of CHD. 
