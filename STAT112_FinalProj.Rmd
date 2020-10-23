@@ -164,7 +164,7 @@ heart_disease %>%
   ggplot(aes(x = diabetes, fill = TenYearCHD)) + 
   geom_bar(position = "dodge") +
   scale_fill_manual(values = c("red", "green4")) +
-  labs(title = "Diabetes Affect on CHD Risk",
+  labs(title = "Diabetes Effect on CHD Risk",
        x = "Diabetes",
        y = "Count",
        fill = "At Risk") +
@@ -188,7 +188,7 @@ heart_disease %>%
         legend.background = element_rect(fill = "grey92"))
 ```
 
-This graph displays the various BMI and heart rates of participants who display signs of heart disease risk. This graph is also faceted by participants who are diabetic or not. This allows us to determine whether heart rate and BMI have a greater influence in CHD risk for individuals who are already diagnosed with a chronic disease. As conveyed in the previous graph, the majority of the participants are not diabetic, however it is once again clear there is a significantly higher proportion of individuals with heart disease among the diabetic group. Despite this proportion, this graph does not appear to display a noticeable correlation between CHD, BMI, and heart rate. This allows us to conclude that diabetes is a greater indicator for CHD than BMI and heart rate for the participants in this dataset.  
+This graph displays the various BMI and heart rates of participants who display signs of heart disease risk. This graph is also faceted by participants who are diabetic or not. This allows us to determine whether heart rate and BMI have a greater influence in CHD risk for individuals who are already diagnosed with a chronic disease. As conveyed in the previous graph, the majority of the participants are not diabetic, however it is once again clear there is a significantly higher proportion of individuals with heart disease among the diabetic group. Despite this proportion, this graph does not appear to display a noticeable correlation between CHD, BMI, and heart rate. This allows us to conclude that diabetes is a greater indicator for CHD than BMI and heart rate for the participants in this data set.  
 
 ```{r, echo = FALSE}
 heart_disease %>% 
