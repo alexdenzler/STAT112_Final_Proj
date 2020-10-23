@@ -156,7 +156,7 @@ heart_disease %>%
         legend.background = element_rect(fill = "grey92"))
 ```
 
-In this plot, we are looking at the effects of blood pressure levels on whether or not a participant is at risk. Here, it is not completly clear whether the majority of at risk participants are towards the higher end of the plot, however it does look as if there are more participants who are not at risk towardsthe lower left quadrant of the graph. Logically, it would make sense to assume that people with higher blood pressure are more likely to be at risk for CHD, given that high blood pressure is generally one of the most telling signs of heart complications.
+In this plot, we are looking at the effects of blood pressure levels on whether or not a participant is at risk. Here, it is not completly clear whether the majority of at risk participants are towards the higher end of the plot, however it does look as if there are more participants who are not at risk towards the lower left quadrant of the graph. Logically, it would make sense to assume that people with higher blood pressure are more likely to be at risk for CHD, given that high blood pressure is generally one of the most telling signs of heart complications.
 
 
 ```{r, echo = FALSE}
