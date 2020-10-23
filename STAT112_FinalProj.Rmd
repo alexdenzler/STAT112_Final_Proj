@@ -175,12 +175,16 @@ heart_disease %>%
 In this graph, we compare the proportions of subjects with and without heart disease between those who have diabetes and those who do not. Among those with diabetes, it appears that about one-third are at risk for heart disease. Compared to the participants who do not have diabetes, this proportion is far greater. Thus, it appears that diabetes is a significant indicator of CHD risk.   
 
 ```{r, echo = FALSE}
+diabetes.labs <- c("Non-Diabetic", "Diabetic")
+names(diabetes.labs) <- c("N", "Y")
+
 heart_disease %>% 
   ggplot(aes(x = BMI, y = heartRate, color = TenYearCHD)) +
   geom_point() +
   scale_color_manual(values = c("red", "green4")) +
-  facet_wrap(vars(diabetes)) +
-  labs(title = "Effect of Heart Rate and BMI on CHD Risk, by Diabetic Status",
+  facet_wrap(vars(diabetes),
+             labeller = labeller(diabetes = diabetes.labs)) +
+  labs(title = "Effect of Heart Rate and BMI on CHD Risk",
        x = "BMI",
        y = "Heart Rate",
        color = "At Risk") +
@@ -195,8 +199,9 @@ heart_disease %>%
   ggplot(aes(x = BMI, y = glucose, color = TenYearCHD)) +
   geom_point() +
   scale_color_manual(values = c("red", "green4")) +
-  facet_wrap(vars(diabetes)) +
-  labs(title = "Effect of Glucose Level and BMI on CHD Risk, by Diabetic Status",
+  facet_wrap(vars(diabetes),
+             labeller = labeller(diabetes = diabetes.labs)) +
+  labs(title = "Effect of Glucose Level and BMI on CHD Risk",
        x = "BMI",
        y = "Glucose Level",
        color = "At Risk") +
