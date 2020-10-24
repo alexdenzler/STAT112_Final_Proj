@@ -25,7 +25,7 @@ library(patchwork)
 
 ## Introduction
 
-This data set explores the factors that could possibly go into getting Coronary Heart Disease (CHD). CHD is usually caused by the buildup of plaque in the arteries, which in turn limits the blood flow to the heart. It is a disease that can be treated, but cannot be cured at this point. Due to its chronic nature, disease prevention is the most effective treatment. The indicating variables in this data set include : age, gender, whether or not the person smokes, how many cigarettes they smoke per day, whether they take blood pressure medication, if they have had a stroke, if they have diabetes, if they have hypertension, systolic and diastolic blood pressure, cholesterol, heart rate, and glucose levels. The several graphs below take a look at all of these indicators of CHD to see if they have an effect on whether someone is at risk of CHD. This will allow us to control for our primary goal to determine whether this data can further prove that smoking has an effect on CHD. 
+This data set explores the factors that could possibly go into getting Coronary Heart Disease (CHD). CHD is usually caused by the buildup of plaque in the arteries, which in turn limits the blood flow to the heart. It is a disease that can be treated, but cannot be cured at this point. Due to its chronic nature, disease prevention is the most effective treatment. The several graphs below investigate further into several indicators of CHD to see if they have an effect on whether someone is at risk of CHD. This will allow us to control for our primary goal to determine whether this data can further prove that smoking has an effect on CHD. 
 
 
 ```{r, echo = FALSE}
@@ -60,7 +60,7 @@ heart_disease <- heart_disease %>%
 
 ## Data Collection
 
-We collected this data from [Kaggle](https://www.kaggle.com/dileep070/heart-disease-prediction-using-logistic-regression). This data has been collected in a town in Framingham, Massachussetts.  
+The data used in this analysis was collected from [Kaggle](https://www.kaggle.com/dileep070/heart-disease-prediction-using-logistic-regression). This data has been collected using participants from Framingham, Massachussetts. This data set tracks whether a participant is at risk for coronary heart disease (CHD) through several risk indicators. The indicating variables in this data set include : age, gender, whether or not the person smokes, how many cigarettes they smoke per day, whether they take blood pressure medication, if they have had a stroke, if they have diabetes, if they have hypertension, systolic and diastolic blood pressure, cholesterol, heart rate, and glucose levels.
 
 
 
@@ -73,6 +73,8 @@ We collected this data from [Kaggle](https://www.kaggle.com/dileep070/heart-dise
 ## Analysis
 
 ### Investigating the Data
+
+In this section we are going to investigate different indicator variables in order to determine which variables have the most significant impact on CHD risk. This will allow us to determine whether smoking cigarettes has a significant impact on CHD risk. 
 
 ```{r, echo = FALSE}
 heart_disease %>% 
